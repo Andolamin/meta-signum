@@ -2,6 +2,8 @@ SUMMARY = "A Qt5 image with all modules from meta-qt5"
 
 LICENSE = "MIT"
 
+include recipes-core/images/rpi-basic-image.bb
+
 inherit core-image
 
 IMAGE_FEATURES += "\

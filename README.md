@@ -7,29 +7,30 @@ Clone Yocto and required layers:
 
     export BASE=~/projects/signum-pi
     mkdir -p $BASE && cd $BASE
-    git clone -b fido git://git.yoctoproject.org/poky poky-fido
-    cd poky-fido
-    git clone -b fido git://git.yoctoproject.org/meta-raspberrypi
+    git clone git://git.yoctoproject.org/poky
+    cd poky
+    git clone git://git.openembedded.org/meta-openembedded
+    git clone git://git.yoctoproject.org/meta-raspberrypi
     git clone -b fido https://github.com/meta-qt5/meta-qt5.git
-    git clone -b fido https://github.com/kovrov/meta-signum.git
+    git clone https://github.com/Andolamin/meta-signum.git
 
 Initialize build configuration "build-rpi":
 
     cd $BASE
-    . poky-fido/oe-init-build-env build-rpi
+    . poky/oe-init-build-env build-rpi
 
 Edit *$BASE/build-rpi/conf/bblayers.conf* so the `BBLAYERS` variable contains following paths:
 
     BBLAYERS ?= " \
-      ${TOPDIR}/../poky-fido/meta-signum \
-      ${TOPDIR}/../poky-fido/meta-signum/meta-rpi \
-      ${TOPDIR}/../poky-fido/meta-raspberrypi \
-      ${TOPDIR}/../poky-fido/meta-qt5 \
-      ${TOPDIR}/../poky-fido/meta-openembedded/meta-networking \
-      ${TOPDIR}/../poky-fido/meta-openembedded/meta-python \
-      ${TOPDIR}/../poky-fido/meta-openembedded/meta-oe \
-      ${TOPDIR}/../poky-fido/meta \
-      ${TOPDIR}/../poky-fido/meta-yocto \
+      ${TOPDIR}/../poky/meta-qt5 \
+      ${TOPDIR}/../poky/meta-signum \
+      ${TOPDIR}/../poky/meta-signum/meta-rpi \
+      ${TOPDIR}/../poky/meta-raspberrypi \
+      ${TOPDIR}/../poky/meta-openembedded/meta-networking \
+      ${TOPDIR}/../poky/meta-openembedded/meta-python \
+      ${TOPDIR}/../poky/meta-openembedded/meta-oe \
+      ${TOPDIR}/../poky/meta \
+      ${TOPDIR}/../poky/meta-yocto \
       "
 
 Add or update BitBake variables in *$BASE/build-rpi/conf/local.conf*:
