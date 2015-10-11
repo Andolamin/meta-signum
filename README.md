@@ -10,8 +10,8 @@ Clone Yocto and required layers:
     git clone git://git.yoctoproject.org/poky
     cd poky
     git clone git://git.openembedded.org/meta-openembedded
-    git clone git://git.yoctoproject.org/meta-raspberrypi
     git clone -b fido https://github.com/meta-qt5/meta-qt5.git
+    git clone -b linux-4.1.x https://github.com/Andolamin/meta-raspberrypi
     git clone https://github.com/Andolamin/meta-signum.git
 
 Initialize build configuration "build-rpi":
@@ -39,6 +39,7 @@ Add or update BitBake variables in *$BASE/build-rpi/conf/local.conf*:
     GPU_MEM = "128"
     DISTRO_FEATURES_remove = "x11 wayland"
     PACKAGE_CLASSES = "package_ipk"
+    PREFERRED_VERSION_linux-raspberrypi ?= "4.1.%"
 
 The `MACHINE` variable could be "raspberrypi" or "raspberrypi2". The `GPU_MEM` variable is used to configure Raspberry Pi GPU memory in megabytes. Optionally `DL_DIR` variable could be set to a common location so archives downloaded from upstream repositories could be shared between different build configurations.
 
@@ -76,6 +77,10 @@ Depending on screen model, a specific HDMI mode may be needed. For example http:
     hdmi_mode=87
     hdmi_cvt 800 480 60 6 0 0 0
     max_usb_current=1
+
+Additionally, if you intend to use the touch features of the official touchscreen, Edit config.txt to include:
+
+    dtoverlay=rpi-ft5406-overlay
 
 More details here http://elinux.org/RPiconfig
 

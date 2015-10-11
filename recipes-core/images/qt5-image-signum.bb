@@ -31,5 +31,3 @@ IMAGE_INSTALL += "\
     signum \
     tzdata \
     "
-
-MACHINE_EXTRA_RRECOMMENDS += "kernel-module-rpi-ft5406"
